@@ -1,0 +1,6 @@
+@BooksWebAPi_New_Project_HostAddress = http://localhost:5296
+
+GET {{BooksWebAPi_New_Project_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
