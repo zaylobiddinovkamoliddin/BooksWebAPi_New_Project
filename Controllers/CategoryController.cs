@@ -55,6 +55,26 @@ namespace BooksWebAPi_New_Project.Controllers
             return Ok(category);
         }
 
+        [HttpGet("Paged")]
+        public async Task<IActionResult> GetPaged(int pagedSize = 10, int pagedNumber = 1)
+        {
+            var paged = await _categoryService.GetPagedCategories(pagedSize, pagedNumber);
+
+            var metaData = new 
+            { 
+                paged.TotalCount,
+                paged.PageSize,
+                paged.CurrentPage,
+                paged.HasNext,
+                paged.HasPrevious,
+            };
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
+
+
+            return Ok(paged.Data);   
+        }
+
         [HttpPut]
         public async Task<IActionResult> Put(CategoryDto category)
         {
