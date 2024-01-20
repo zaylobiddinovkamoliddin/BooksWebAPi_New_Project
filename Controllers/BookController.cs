@@ -1,4 +1,6 @@
 ﻿using BooksWepAPiDtos.BookDtos;
+using BusinessLogicLayer;
+using BusinessLogicLayer.Helpers;
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,13 +25,12 @@ namespace BooksWebAPi_New_Project.Controllers
             return  Ok(books);
         }
 
-
-        //[HttpGet("get-with-category-name")]
-        //public async Task<IActionResult> GetWithName()
-        //{
-        //    var books = await _bookService.GetBooksWithCategoryName();
-        //    return Ok(books);
-        //}
+        [HttpGet("Filter")]
+        public async Task<IActionResult> Filter([FromQuery]FilterParameters filterParameters)
+        {
+            var filter = await _bookService.Filter(filterParameters);
+            return Ok(filter);
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
