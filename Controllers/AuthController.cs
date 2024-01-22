@@ -34,9 +34,9 @@ namespace BooksWebAPi_New_Project.Controllers
             var result = await _userService.LoginUserAsync(loginUserDto);
             if (result.IsSuccessed)
             {
-                return Ok("Successfully logged in !");
+                return Ok(result.Token);
             }
-            return BadRequest(result.ErrorrMessages);
+            return BadRequest(result.ErrorMessages);
         }
     }
 }
